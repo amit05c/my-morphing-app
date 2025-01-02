@@ -10,6 +10,8 @@ const AnimatedText = () => {
     "Stay Curious, Stay Ahead",
   ];
 
+  const colors = ['#FF5733', '#33FF57', '#5733FF', '#FFC300', '#33FFF2', '#FF33A1'];
+
   const [currentText, setCurrentText] = useState(phrases[0]);
 
   useEffect(() => {
@@ -54,12 +56,20 @@ const AnimatedText = () => {
       variants={textVariants}
       className="text-center"
     >
-      <h1 className="text-5xl md:text-7xl font-bold text-white tracking-widest leading-snug">
-        {currentText.split(" ").map((word, index) => (
-          <motion.span key={index} className="block" variants={wordVariants}>
-            {word}
-          </motion.span>
-        ))}
+      <h1 className="text-5xl md:text-7xl font-bold tracking-widest leading-snug">
+        {currentText.split(" ").map((word, index) => {
+          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+          return (
+            <motion.span
+              key={index}
+              className="block"
+              variants={wordVariants}
+              style={{ color: randomColor }} // Apply random color to each word
+            >
+              {word}
+            </motion.span>
+          );
+        })}
       </h1>
     </motion.div>
   );
